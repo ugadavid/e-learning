@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appli FLE - Genre des mots</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 300px 100px;
+            gap: 20px;
+            width: 70%;
+            text-align: center;
+        }
+        .column {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #ddd;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+        }
+        #masculin {
+            background-color: lightblue;
+        }
+        #feminin {
+            background-color: lightpink;
+        }
+        /* Effet survol et drag-over */
+        #masculin:hover, #masculin.drag-over {
+            background-color: #6495ed;
+        }
+        #feminin:hover, #feminin.drag-over {
+            background-color: #ff69b4;
+        }
+        /* Effet colonne sélectionnée */
+        .selected {
+            border: 5px solid green;
+        }
+        .word-box {
+            grid-column: span 2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #fff;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: opacity 0.2s ease;
+        }
+        /* Quand le mot est en cours de drag, on le rend invisible */
+        .dragging {
+            opacity: 0;
+        }
+        /* Effet sur l'élément dragué */
+        .drag-preview {
+            font-size: 1.5em;
+            padding: 10px;
+            background-color: #f4f4f4;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="column" id="masculin">Masculin</div>
+        <div class="column" id="feminin">Féminin</div>
+        <div class="word-box" draggable="true" id="word">Chat</div>
+    </div>
+
+    <script>
+        // Tableau de mots (vous pouvez l'enrichir)
+        const mots = [
+            { mot: "Chat", genre: "masculin" },
+            { mot: "Voiture", genre: "feminin" },
+            { mot: "Arbre", genre: "masculin" },
+            { mot: "Maison", genre: "feminin" },
+            // Ajoutez plus de mots ici
+        ];
+
+        let currentIndex = 0; // Index pour suivre le mot en cours
+
+        const wordBox = document.getElementById('word');
+        const masculin = document.getElementById('masculin');
+        const feminin = document.getElementById('feminin');
+
+        // Afficher le mot courant
+        function updateWord() {
+            if (currentIndex < mots.length) {
+                wordBox.textContent = mots[currentIndex].mot;
+            } else {
+                wordBox.textContent = "Fini !";
+                wordBox.setAttribute('draggable', 'false'); // Désactiver le drag and drop
+            }
+        }
+
+        // Fonction de drag and drop
+        wordBox.addEventListener('dragstart', (e) => {
+            wordBox.classList.add('dragging');
+
+            const dragPreview = document.createElement('div');
+            dragPreview.textContent = e.target.textContent;
+            dragPreview.classList.add('drag-preview');
+            document.body.appendChild(dragPreview);
+            e.dataTransfer.setDragImage(dragPreview, 0, 0);
+            setTimeout(() => dragPreview.remove(), 0);
+
+            e.dataTransfer.setData('text', e.target.id);
+        });
+
+        wordBox.addEventListener('dragend', () => {
+            wordBox.classList.remove('dragging');
+        });
+
+        masculin.addEventListener('dragover', (e) => {
+            e.preventDefault();
+        });
+
+        feminin.addEventListener('dragover', (e) => {
+            e.preventDefault();
+        });
+
+        masculin.addEventListener('dragenter', () => {
+            masculin.classList.add('drag-over');
+        });
+
+        feminin.addEventListener('dragenter', () => {
+            feminin.classList.add('drag-over');
+        });
+
+        masculin.addEventListener('dragleave', () => {
+            masculin.classList.remove('drag-over');
+        });
+
+        feminin.addEventListener('dragleave', () => {
+            feminin.classList.remove('drag-over');
+        });
+
+        masculin.addEventListener('drop', (e) => {
+            e.preventDefault();
+            let data = e.dataTransfer.getData('text');
+            if (data === 'word') {
+                console.log('Masculin choisi');
+                masculin.classList.add('selected');
+                feminin.classList.remove('selected');
+                masculin.classList.remove('drag-over'); // Retirer l'effet de survol
+
+                // Passer au mot suivant
+                currentIndex++;
+                updateWord();
+            }
+        });
+
+        feminin.addEventListener('drop', (e) => {
+            e.preventDefault();
+            let data = e.dataTransfer.getData('text');
+            if (data === 'word') {
+                console.log('Féminin choisi');
+                feminin.classList.add('selected');
+                masculin.classList.remove('selected');
+                feminin.classList.remove('drag-over'); // Retirer l'effet de survol
+
+                // Passer au mot suivant
+                currentIndex++;
+                updateWord();
+            }
+        });
+
+        // Initialisation avec le premier mot
+        updateWord();
+    </script>
+
+</body>
+</html>
