@@ -20,6 +20,11 @@ Ce dépôt contient mes ressources pour le projet e-learning.
 - David
 - Paloa ?
 
+### Back home
+
+**Description :** Projet central pour organiser et suivre tous mes autres projets.
+[Lien vers le dépôt](https://github.com/ugadavid/project-manager)
+
 ## Comment contribuer
 
 Envoyez moi votre mail sur le groupe WhatsApp
