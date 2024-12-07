@@ -1,6 +1,6 @@
 # E-learning
 
-![Planning](/planning.png)
+![Planning](/images/planning.png)
 
 ## e-learning
 
