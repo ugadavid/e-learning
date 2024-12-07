@@ -1,6 +1,6 @@
 # E-learning
 
-Ce dépôt contient mes ressources pour le projet e-learning.
+![Planning](/planning.png)
 
 ## e-learning
 
