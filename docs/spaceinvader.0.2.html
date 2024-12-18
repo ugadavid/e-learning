@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Invaders</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: black;
+            color: white;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+
+        #game-container {
+            position: relative;
+            width: 600px;
+            height: 400px;
+            margin: 50px auto;
+            background-color: #111;
+            border: 2px solid white;
+            overflow: hidden;
+        }
+
+        .spaceship {
+            position: absolute;
+            bottom: 10px;
+            left: 275px;
+            width: 50px;
+            height: 20px;
+            background-color: white;
+        }
+
+        .enemy {
+            position: absolute;
+            width: 40px;
+            height: 20px;
+            background-color: red;
+        }
+
+        .bullet {
+            position: absolute;
+            width: 5px;
+            height: 10px;
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <div class="spaceship" id="spaceship"></div>
+    </div>
+
+    <script>
+        const gameContainer = document.getElementById('game-container');
+        const spaceship = document.getElementById('spaceship');
+        let spaceshipPosition = 275;
+        const bulletSpeed = 5;
+        const bullets = [];
+        const enemies = [];
+        const enemySpeed = 2;
+
+        // Move spaceship left and right
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'ArrowLeft' && spaceshipPosition > 0) {
+                spaceshipPosition -= 10;
+            } else if (event.key === 'ArrowRight' && spaceshipPosition < 550) {
+                spaceshipPosition += 10;
+            }
+            spaceship.style.left = `${spaceshipPosition}px`;
+        });
+
+        // Shoot bullet
+        document.addEventListener('keydown', (event) => {
+            if (event.key === ' ') {
+                const bullet = document.createElement('div');
+                bullet.classList.add('bullet');
+                bullet.style.left = `${spaceshipPosition + 22}px`;
+                bullet.style.top = '370px';
+                gameContainer.appendChild(bullet);
+                bullets.push(bullet);
+            }
+        });
+
+        // Spawn enemies one by one
+        function spawnEnemy() {
+            const enemy = document.createElement('div');
+            enemy.classList.add('enemy');
+            enemy.style.left = `${Math.random() * 560}px`;
+            enemy.style.top = '0px';
+            gameContainer.appendChild(enemy);
+            enemies.push(enemy);
+
+            // Spawn next enemy after a random delay
+            setTimeout(spawnEnemy, Math.random() * 2000 + 1000);
+        }
+
+        // Bullet movement and collision detection
+        function gameLoop() {
+            bullets.forEach((bullet, index) => {
+                const bulletTop = parseInt(bullet.style.top);
+                bullet.style.top = `${bulletTop - bulletSpeed}px`;
+
+                // Remove bullet if it goes out of bounds
+                if (bulletTop < 0) {
+                    bullet.remove();
+                    bullets.splice(index, 1);
+                }
+
+                // Collision detection with enemies
+                enemies.forEach((enemy, enemyIndex) => {
+                    const enemyRect = enemy.getBoundingClientRect();
+                    const bulletRect = bullet.getBoundingClientRect();
+
+                    if (
+                        bulletRect.left < enemyRect.right &&
+                        bulletRect.right > enemyRect.left &&
+                        bulletRect.top < enemyRect.bottom &&
+                        bulletRect.bottom > enemyRect.top
+                    ) {
+                        enemy.remove();
+                        bullet.remove();
+                        bullets.splice(index, 1);
+                        enemies.splice(enemyIndex, 1);
+                    }
+                });
+            });
+
+            // Move enemies downward
+            enemies.forEach((enemy, index) => {
+                const enemyTop = parseInt(enemy.style.top);
+                enemy.style.top = `${enemyTop + enemySpeed}px`;
+
+                // Remove enemy if it goes out of bounds
+                if (enemyTop > 400) {
+                    enemy.remove();
+                    enemies.splice(index, 1);
+                }
+            });
+
+            requestAnimationFrame(gameLoop);
+        }
+
+        // Start the game
+        spawnEnemy();
+        gameLoop();
+    </script>
+</body>
+</html>

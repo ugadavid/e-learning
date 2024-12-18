@@ -2,8 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <!-- jQuery & jQuery UI -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
@@ -45,13 +44,13 @@
             position: relative;
         }
         .exercise-container {
+            position: relative;
             width: 100%;
             max-width: 600px;
             height: 400px;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            position: relative;
         }
         .drop-zone {
             display: flex;
@@ -71,18 +70,18 @@
             color: #fff;
             text-transform: uppercase;
         }
-        #masculin {
+        .masculin {
             background-color: #007bff;
         }
-        #feminin {
+        .feminin {
             background-color: #f78fb3;
         }
-        #word-card {
+        .word-card {
             position: absolute;
-            bottom: 10px;
-            /*top: calc(100% - 10px - 50px);*/
-            left: 50%;
-            transform: translateX(-50%);
+            top: 300px;        /* Position verticale fixe */
+            left: 50%;         /* Centré horizontalement */
+            width: 200px;      /* Largeur fixe pour centrer facilement */
+            margin-left: -100px; /* Décalage de la moitié de la largeur */
             background-color: #fdd835;
             color: #333;
             font-size: 2em;
@@ -138,16 +137,54 @@
         <div class="exercise-container">
             <!-- Zones de drag and drop -->
             <div class="drop-zone">
-                <div class="masculin" id="masculin">Masculin</div>
-                <div class="feminin" id="feminin">Féminin</div>
+                <div class="masculin" id="droppable1">Masculin</div>
+                <div class="feminin" id="droppable2">Féminin</div>
             </div>
             <!-- Carte du mot -->
-            <div class="word-card" id="word-card">Chocolat</div>
+            <div class="word-card" id="draggable">Chocolat</div>
         </div>
     </main>
 
-    <script src="match.js"></script>
-    
-    
+    <script>
+    $(function() {
+
+        // Rendre les zones droppable positionnées
+        $("#droppable1, #droppable2").css('position','relative');
+
+        // Rendre la carte draggable sans réglages complexes
+        $("#draggable").draggable();
+
+        // Gestion du drop
+        $("#droppable1, #droppable2").droppable({
+            accept: "#draggable",
+            drop: function(event, ui) {
+                var $chocolat = ui.draggable;
+
+                // Position actuelle de la carte dans la page
+                var currentOffset = $chocolat.offset();
+                var dropOffset = $(this).offset();
+
+                // On insère la carte dans la zone droppable
+                $(this).append($chocolat);
+
+                // On recalcule sa position absolue à l'intérieur de la zone droppable,
+                // pour qu'elle apparaisse au même endroit visuel qu'avant le drop.
+                $chocolat.css({
+                    position: 'absolute',
+                    top: (currentOffset.top - dropOffset.top) + 'px',
+                    left: (currentOffset.left - dropOffset.left) + 'px',
+                    marginLeft: '0' // On enlève le margin-left pour qu'elle soit à l'endroit exact
+                });
+
+                // Après 2 secondes, disparition de la carte
+                setTimeout(function(){
+                    $chocolat.fadeOut("slow", function() {
+                        $(this).remove();
+                    });
+                }, 2000);
+            }
+        });
+    });
+    </script>
 </body>
 </html>

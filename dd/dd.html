@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Test Drag&amp;Drop</title>
+		<!-- inclusion des libraries jQuery et jQuery UI (fichier principal et plugins) -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.14.1/themes/smoothness/jquery-ui.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.14.1/jquery-ui.min.js"></script>
+		
+		<!-- feuille de style perso -->
+		<link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>
+	<h2>Exemple simple mais complet de "drag and drop" avec JQuery UI</h2>
+	<p>Associez chaque animal à sa catégorie</p>
+	<div id="zone">
+		<div id="zdrag">
+			<h3>Zone Drag (éléments déplaçables)</h3>
+			<div class="dep" id="lapin">Lapin</div>
+			<div class="dep" id="colibri">Colibri</div>
+			<div class="dep" id="truite">Truite</div>
+			<div class="dep" id="mouche">Mouche</div>
+			<div class="dep" id="moustique">Moustique</div>
+			<div class="dep" id="saumon">Saumon</div>
+		</div>
+		<div id="zdrop">
+			<h3>Zone Drop (zônes de dépôt)</h3>
+			<div class="rep" id="Poisson">Poisson</div>
+			<div class="rep" id="Oiseau">Oiseau</div>
+			<div class="rep" id="Rongeur">Rongeur</div>
+			<div class="rep" id="Insecte">Insecte</div>
+		</div>
+	</div>
+	<div>	
+		<input id="verif" type="button" value="Vérifier"/>
+	</div>
+		
+	<script>
+	$(document).ready(function(){
+		// Fonction qui vérifie la table des réponses
+		$("input#verif").on("click", function(e){
+			for (var cat in tabRep){
+				console.log(tabRep[cat]);
+				 for (i=0;i<tabRep[cat].length;i++){
+					el=tabRep[cat][i];
+					if(tabSol[el]==cat) {
+						alert("OK:"+el+" est un "+cat);
+					} else {
+						alert("NON:"+el+" n'est pas un "+cat);
+					}
+				 }
+			}
+		});
+	
+		/* la table contenant les réponses, initialisée à vide */
+		var tabRep = {"Poisson":[],"Oiseau":[],"Rongeur":[],"Insecte":[]};
+		/* la table des solutions mettant en relation chaque case avec la réponse attendue */
+		var tabSol = {"lapin":"Rongeur","colibri":"Oiseau","truite":"Poisson","mouche":"Insecte","moustique":"Insecte","saumon":"Poisson"};
+
+		
+		
+		/* Définition des objets déplaçables (draggable) */
+		$('.dep').draggable({
+			containment : '#zone',
+			revert : 'invalid', // une fois posé ils ne peuvent plus être déplacé
+			cursor: 'move'
+		});
+		/* Définition des zones de dépôt (droppable) */
+		$('.rep').droppable({
+			accept: '.dep', // classes acceptées 
+			drop : function( event, ui ) {
+				// on récupère l'id de l'élément déplacé
+				idEl = ui.draggable.attr('id');
+				// on récupère l'id de la zone de dépôt
+				idRe = $(this).attr('id');		
+				// on ajoute la réponse dans la table des réponses
+				tabRep[idRe].push(idEl);
+				console.log(tabRep[idRe]);
+				// on masque l'élément déplacé
+				ui.draggable.hide();
+			}
+		});
+	});
+		
+	</script>
+    </body>
+
+</html>
