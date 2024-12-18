@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercice - Classer le mot</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fb;
+            color: #333;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 1.5em;
+        }
+        header nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 15px;
+            font-weight: bold;
+        }
+        header nav a:hover {
+            text-decoration: underline;
+        }
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 90vh;
+            position: relative;
+        }
+        .exercise-container {
+            width: 100%;
+            max-width: 600px;
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+        .drop-zone {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+        }
+        .drop-zone div {
+            flex: 1;
+            height: 150px;
+            margin: 0 10px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #fff;
+            text-transform: uppercase;
+        }
+        .masculin {
+            background-color: #007bff;
+        }
+        .feminin {
+            background-color: #f78fb3;
+        }
+        .word-card {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #fdd835;
+            color: #333;
+            font-size: 2em;
+            font-weight: bold;
+            padding: 20px 30px;
+            border-radius: 10px;
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        .search-bar {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .search-bar input {
+            padding: 8px 12px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 250px;
+        }
+        .search-bar button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .search-bar button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Exercice : Classer le mot</h1>
+        <nav>
+            <a href="#">Accueil</a>
+            <a href="#">Profil</a>
+            <a href="#">Quitter l'exercice</a>
+            <a href="#" class="logout">Se déconnecter</a>
+        </nav>
+    </header>
+    <main>
+        <div class="search-bar">
+            <input type="text" placeholder="Rechercher un mot...">
+            <button>Ok</button>
+        </div>
+        <div class="exercise-container">
+            <!-- Zones de drag and drop -->
+            <div class="drop-zone">
+                <div class="masculin">Masculin</div>
+                <div class="feminin">Féminin</div>
+            </div>
+            <!-- Carte du mot -->
+            <div class="word-card">Chocolat</div>
+        </div>
+    </main>
+</body>
+</html>

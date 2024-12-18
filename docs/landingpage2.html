@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de bord - Progression</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fb;
+            color: #333;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 1.5em;
+        }
+        header .logout {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        main {
+            padding: 20px;
+        }
+        .progression {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .progression h2 {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+            color: #007bff;
+        }
+        .progression .bar {
+            background-color: #e4e4e4;
+            border-radius: 10px;
+            height: 20px;
+            width: 80%;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        .progression .bar span {
+            display: block;
+            height: 100%;
+            background-color: #fdd835;
+            width: 50%; /* Exemple de progression */
+        }
+        .recent-activities, .stats {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .recent-activities h3, .stats h3 {
+            margin-top: 0;
+            color: #007bff;
+        }
+        .activities-list {
+            list-style: none;
+            padding: 0;
+        }
+        .activities-list li {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        .activities-list li:last-child {
+            border-bottom: none;
+        }
+        .activities-list .score {
+            float: right;
+            color: #f39c12;
+            font-weight: bold;
+        }
+        .objectives {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .objectives p {
+            font-size: 1.1em;
+        }
+        .objectives button {
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .objectives button:hover {
+            background-color: #218838;
+        }
+        .stats {
+            display: flex;
+            justify-content: space-around;
+        }
+        .stats div {
+            text-align: center;
+        }
+        .stats h4 {
+            margin: 0;
+            font-size: 1.5em;
+            color: #007bff;
+        }
+        .stats p {
+            margin: 5px 0 0;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Tableau de bord</h1>
+        <a href="index.html" class="logout">Se déconnecter</a>
+    </header>
+    <main>
+        <!-- Progression -->
+        <div class="progression">
+            <h2>Votre progression globale</h2>
+            <div class="bar">
+                <span style="width: 60%;"></span>
+            </div>
+        </div>
+
+        <!-- Activités récentes -->
+        <div class="recent-activities">
+            <h3>Activités récentes</h3>
+            <ul class="activities-list">
+                <li>Module 1 - Genres des professions <span class="score">80%</span></li>
+                <li>Module 2 - Objets du quotidien <span class="score">90%</span></li>
+                <li>Module 3 - Révision : Terminaisons en -ion <span class="score">70%</span></li>
+            </ul>
+        </div>
+
+        <!-- Statistiques -->
+        <div class="stats">
+            <div>
+                <h4>15</h4>
+                <p>Modules complétés</p>
+            </div>
+            <div>
+                <h4>120</h4>
+                <p>Minutes passées</p>
+            </div>
+            <div>
+                <h4>85%</h4>
+                <p>Score global</p>
+            </div>
+        </div>
+
+        <!-- Objectifs du jour -->
+        <div class="objectives">
+          <form action="match.html">
+            <p>Votre objectif d'apprentissage pour aujourd'hui :<br> Compléter 10 nouvelles cartes et réviser 15 anciennes.</p>
+            <button>Commencer maintenant</button>
+          </form>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prototype - Page d'accueil</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #fdfdfd;
+            color: #333;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #ffffff;
+            border-bottom: 1px solid #ddd;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 1.5em;
+        }
+        header .actions {
+            display: flex;
+            align-items: center;
+        }
+        header button, header input {
+            margin-left: 10px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        main {
+            padding: 20px;
+        }
+        .learning-goal {
+            display: flex;
+            justify-content: space-between;
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .learning-goal .goal {
+            text-align: center;
+        }
+        .learning-goal span {
+            font-weight: bold;
+            color: #007bff;
+        }
+        .vocabulary {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        .vocabulary .card {
+            flex: 1;
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .vocabulary .card h2 {
+            margin: 0 0 10px 0;
+        }
+        .collections {
+            margin-top: 30px;
+        }
+        .collections h2 {
+            margin-bottom: 15px;
+        }
+        .collections .collection-card {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Exercises</h1>
+        <div class="actions">
+            <input type="search" placeholder="Rechercher">
+            <button>+</button>
+        </div>
+    </header>
+    <main>
+        <!-- Objectif d'apprentissage -->
+        <section class="learning-goal">
+            <div class="goal">
+                <p>New</p>
+                <span>0/10</span>
+            </div>
+            <div class="goal">
+                <p>Repeat</p>
+                <span>0/15</span>
+            </div>
+            <div class="goal">
+                <p>Time</p>
+                <span>0/3</span>
+            </div>
+        </section>
+
+        <!-- Section vocabulaire -->
+        <section class="vocabulary">
+            <div class="card">
+                <h2>New</h2>
+                <p>0</p>
+            </div>
+            <div class="card" style="background-color: #fdd835;">
+                <h2>Recognized</h2>
+                <p>15</p>
+            </div>
+        </section>
+
+        <!-- Collections -->
+        <section class="collections">
+            <h2>My collections</h2>
+            <div class="collection-card">
+                <p>Most useful words for C1 p.1</p>
+            </div>
+            <div class="collection-card">
+                <p>Most useful words for C1 p.2</p>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

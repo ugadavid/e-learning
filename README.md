@@ -28,3 +28,29 @@
 ## Comment contribuer
 
 Envoyez moi votre mail sur le groupe WhatsApp
+
+
+
+
+Home
+├── Connexion / Inscription
+├── Tableau de bord utilisateur
+│   ├── Suivi des progrès
+│   ├── Historique des exercices
+│   └── Paramètres utilisateur
+├── Modules d'apprentissage
+│   ├── Recherche du genre grammatical
+│   ├── Jeux et exercices interactifs
+│   │   ├── Classement par genre
+│   │   ├── Association mots-images
+│   │   ├── Cloze text (texte à trous)
+│   │   └── Drag & Drop
+│   └── Progression personnalisée
+├── Ressources linguistiques
+│   ├── Lexiques thématiques
+│   ├── Explications grammaticales
+│   └── Liste des exceptions
+└── Support et aide
+    ├── FAQ
+    └── Contact
+
